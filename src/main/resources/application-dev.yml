@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+spring:
+  application:
+  name: Vivacon
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/vivacon?useSSL=false&useUnicode=true
+    username: postgres
+    password: 12345678
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        format_sql: true
+        schema_update:
+          unique_constraint_strategy: RECREATE_QUIETLY
+        metadata_builder_contributor: com.vivacon.common.relational_db.SQLFunctionsMetadataBuilderContributor
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+      location: ${java.io.tmpdir}
+
+vivacon:
+  jwt:
+    secret_salt: Vivacon@123456
+    jwt_validity: 36000000 # 1000 * 60 * 60 - 1 Hour
+    jwt_issuer: Vivacon_Khoa_Truc_Hung
+    refresh_expiration: 360000000 # 1000 * 60 * 60 * 100- 100 Hour
+  verification_token:
+    expiration: 600000 # 10 * 60 * 1000 - 10 minutes
+  email:
+    address: yummy.ad.md6@gmail.com
+    password: ldjjlzcnnoizjogi
+
+
+aws:
+  access_key_id: AKIA4MTWKVAY7V43ZYEI
+  secret_access_key: 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
+  s3:
+    bucket: vivacon-objects
+    region: ap-southeast-2
+
+
+
